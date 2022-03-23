@@ -1,0 +1,58 @@
+html{
+  /* background: linear-gradient(to right, #132549, #101731, #1a1833); */
+  background: linear-gradient(to right, #2c559b, #24477c,  #24455b, #204050,  #316469);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+
+body{
+  background: linear-gradient(to right, #2c559b, #24477c,  #24455b, #204050,  #316469);
+  /* background-color: green; */
+  box-sizing: border-box;
+  min-width: 100%;
+  margin: 0;
+  
+}
+
+*, *::before, *::after{
+  box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #316469; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2c559b; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #162951; 
+}
+
+
+@media screen and (max-width: 768px) {
+  html{
+    background: linear-gradient(to top right, #162951, #132549,  #132347, #0f1a37,  #101631, #181935,#181732,#16162f,#1b1833);
+  }
+  body{
+    background: linear-gradient(to top right, #162951, #132549,  #132347, #0f1a37,  #101631, #181935,#181732,#16162f,#1b1833);
+  }
+}
+

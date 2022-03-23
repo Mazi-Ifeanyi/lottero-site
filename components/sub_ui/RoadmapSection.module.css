@@ -1,0 +1,200 @@
+.parent{
+    margin-left: 250px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+  }
+
+  .h1Tag{
+    text-align: start;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    word-wrap: break-word;
+    /* background: linear-gradient(to right,#00eaff, #096b21, #00ff40); */
+    background: linear-gradient(115deg, rgb(33, 164, 255), rgb(0, 255, 173), rgb(33, 243, 220), rgb(18, 188, 254), rgb(68, 206, 123));
+    -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+    margin: 0;
+    margin-left: 70px;
+  }
+
+.roadImage{
+    width: 300px;
+    height: 300px;
+}
+
+.sections{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.sectionOne{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+.leftSection{
+    width: 40%;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.rightSection{
+    width: 60%;
+    height: fit-content;
+    align-items: center;
+    justify-content: flex-start;
+    display: flex;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.rightSection >p{
+    color: #b2b8c4;
+    font-family: monospace;
+    font-size: 20px;
+    word-wrap: break-word;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    text-align: start;
+}
+
+
+.sectionTwo{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.roadContainer{
+   display: flex;
+   flex-direction: column;
+   width: 300px;
+   height: fit-content;
+   margin: 10px 0px 10px 15px;
+   flex-wrap: wrap;
+}
+
+.roadContainer >h2{
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    background: linear-gradient(115deg, rgb(33, 164, 255), rgb(0, 255, 173), rgb(33, 243, 220), rgb(18, 188, 254), rgb(68, 206, 123));
+    -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+
+.levelContainer{
+   display: flex;
+   justify-content: flex-start;
+   flex-direction: column;
+   background-color: rgba(255, 255, 255, 0.07);
+   backdrop-filter: blur(10px);
+   border-radius: 10px;
+   padding-left: 20px;
+   /* height: 400px; */
+   height: fit-content;
+}
+
+.itemsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.numberPara{
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(10px);
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 1;
+    color: #fff;
+    padding: 3px;
+    background: linear-gradient(115deg, rgb(33, 164, 255), rgb(0, 255, 173), rgb(33, 243, 220), rgb(18, 188, 254), rgb(68, 206, 123));
+    -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+
+.para{
+   margin-left: 10px;
+   font-size: 17px;
+   color: #fff;
+   /* font-family: ; */
+   word-wrap: break-word;
+}
+
+@media screen and (max-width: 768px) {
+.parent{
+  margin-left: 0px;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.h1Tag{
+    text-align: center;
+    margin-left: 0px;
+  }
+
+.sections{
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.sectionOne{
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.roadContainer{
+    width: 100%;
+    margin: 10px 15px 10px 15px;
+ }
+
+.leftSection{
+    width: 100%;
+}
+
+.rightSection{
+    padding-left: 25px;
+    padding-right: 10px;
+    width: 100%;
+}
+
+.rightSection >p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sectionTwo{
+    width: 100%;
+
+}
+}
+
+@media only screen and (min-width: 800px) and (max-width: 930px) {
+    .parent{
+        margin-left: 5px;
+      }
+      .sectionTwo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

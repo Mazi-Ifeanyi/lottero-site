@@ -1,0 +1,65 @@
+.parent{
+    margin-left: 250px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: fit-content;
+    border-color: rgb(98, 91, 117);
+    border-style: solid;
+    border-width: 0.2px 0px 0px 0px;
+    flex-wrap: wrap;
+    padding-left: 60px;
+  }
+
+  .parent > section{
+     width: 350px;
+     display: flex;
+     flex-direction: column;
+  }
+
+  .h2Tag{
+     color: #fff;
+     font-size: 18px;
+}
+  .parent >section >a{
+    font-size: 16px;
+    margin-top: 10px;
+    text-decoration: none;
+    width: fit-content;
+    color: rgb(33, 164, 255);
+  }
+
+  .parent >section >a:hover{
+    text-decoration:underline;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .parent{
+        margin-left: 0px;
+        flex-direction: row;
+        height: fit-content;
+        border-width: 0.5px 0px 0px 0px;
+        padding-left: 20px;
+      }
+
+      .parent >section{
+          margin-top: 20px;
+      }
+
+      .parent >section >a{
+        color: rgb(33, 164, 255);
+      }
+     
+  }
+
+  @media only screen and (min-width: 800px) and (max-width: 930px) {
+    .parent{
+        margin-left: 5px;
+        margin-top: 100px;
+        display: flex;
+        height: fit-content;
+      }
+}
