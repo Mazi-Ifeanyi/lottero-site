@@ -1,6 +1,5 @@
 import classes from './LoadingUI.module.css';
 import ScaleLoader from 'react-spinners/ScaleLoader';
-import { useState } from 'react';
 
 const LoadingUI = () =>{
 

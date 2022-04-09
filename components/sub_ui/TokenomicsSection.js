@@ -8,22 +8,21 @@ import { isNull } from '../../util/Util';
 
 const TokenomicsSection =() =>{
     const [isCopied, setIsCopied] = useState(false);
-    const selector = useSelector(state => state.ui);
+    const selector = useSelector(state => state.lottero);
     const ca = isNull(selector.contractAddress)? '--' : selector.contractAddress;
 
    
 
    const copyHandler = (e) =>{
-     // if(ca === '--') return;
+      if(ca === '--') return;
        navigator.clipboard.writeText(ca).then(()=>{
         setIsCopied(true);
        }).catch(()=>{
            setIsCopied(false);
        });
-    
       const timer = setTimeout(()=>{
         setIsCopied(false);
-         }, 1000);
+         }, 2000);
   
          return ()=> clearTimeout(timer);
 
@@ -61,4 +60,4 @@ const TokenomicsSection =() =>{
     </div>
 }
 
-export default React.memo(TokenomicsSection);
+export default TokenomicsSection;

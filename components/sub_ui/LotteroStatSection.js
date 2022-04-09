@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 
 const LotteroStatSection = () => {
-    const selector = useSelector(state => state.ui);
+    const selector = useSelector(state => state.lottero);
     let totalSupply =  selector.totalSupply.toFixed(0);
     let circSupply = selector.circSupply.toFixed(0);
     let burntSupply = selector.burntSupply.toFixed(0);
@@ -22,6 +22,12 @@ const LotteroStatSection = () => {
         circSupply = formatter.format(circSupply).replace('$',''); 
         burntSupply = formatter.format(burntSupply).replace('$',''); 
         }catch(err){}
+
+ const openBscscanHandler = () =>{
+     window.open('https://bscscan.com/token/0x3a83e8b8c9e447c2e90e6e036eac8624d883f5fc');
+  }
+
+
 
     return <main className={classes.parent} id='lottero-stat'>
         <section className={classes.leftSection}>
@@ -40,7 +46,7 @@ const LotteroStatSection = () => {
                     <p className={classes.rightPara}>{burntSupply}</p>
                 </div>
                 <div className={classes.btnContainer}>
-                    <button className={classes.openBscBtn}>Open bscscan</button>
+                    <button className={classes.openBscBtn} onClick={openBscscanHandler}>Open bscscan</button>
                 </div>
             </article>
         </section>
@@ -51,4 +57,4 @@ const LotteroStatSection = () => {
     </main>
 }
 
-export default React.memo(LotteroStatSection);
+export default LotteroStatSection;

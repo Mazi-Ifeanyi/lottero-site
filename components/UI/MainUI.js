@@ -1,10 +1,8 @@
 import classes from './MainUI.module.css';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-scroll';
-import useAxios from '../../hooks/use-axios';
-import { useDispatch } from 'react-redux';
 import { saveAs } from 'file-saver';
-
+import { useNavigate } from 'react-router-dom';
 
 import hamburgerLogo from '../../assets/hamburger_icon.png';
 import homeLogo from '../../assets/home.png';
@@ -17,18 +15,10 @@ import RoadmapIcon from '../../assets/roadmap_icon.png';
 import TwitterIcon from '../../assets/twitter_icon.png';
 import TelegramIcon from '../../assets/telegram_icon.png';
 import ChannelIcon from '../../assets/channel_icon.png';
+import PlayersIcon from '../../assets/players_icon.png';
 
-import HomeSection from '../sub_ui/HomeSection';
-import LotteroStatSection from '../sub_ui/LotteroStatSection';
-import MarketStatSection from '../sub_ui/MarketStatSection';
-import TokenomicsSection from '../sub_ui/TokenomicsSection';
-import RoadmapSection from '../sub_ui/RoadmapSection';
+
 import BottomSection from '../sub_ui/BottomSection';
-import GameStatSection from '../sub_ui/GameStatSection';
-import { saveLotteroData } from '../../store/Slice';
-import LoadingUI from './LoadingUI';
-import Popup from './Popup';
-
 
 function useWindowSize(){
     const [size, setSize] = useState([0, 0]);
@@ -47,36 +37,24 @@ function useWindowSize(){
 }
 
 
-const Header = () =>{
-   const dispatch = useDispatch();
+const MainUI = (props) =>{
   const [width] = useWindowSize();
+  const navigate = useNavigate();
   const [ isNavOpen, setIsNavOpen ] = useState(true);
-  const [showPopup, setShowPopup] = useState(false);
-  const { sendGetRequest, isLoading } = useAxios();
 
+
+//   useEffect(()=>{
+//    navigate('/home');
+//   },[navigate])
 
    useEffect(()=>{
       if(width >=400 ) document.getElementById('id').style.width = "250px";
 
    },[width]);
 
-   
-   useEffect(()=>{
-      //send request to server
-      // const url = 'http://192.168.43.188:4000';
-      const url = 'https://lottero.finance/market';
-
-       sendGetRequest(url, function(resData){
-         dispatch(saveLotteroData(resData));
-       });
-
-   },[sendGetRequest, dispatch]);
-
-
 
   const openNav = () =>{
     document.getElementById('id').style.width = "250px";
-    // document.getElementById('main').style.marginLeft = "250px";
 }
 
 
@@ -85,10 +63,17 @@ const closeNav = () =>{
   if(width <= 930 ) document.getElementById('id').style.width = "0";
   if(width > 768) return;
   document.getElementById('id').style.width = "0";
-  // document.getElementById('main').style.marginLeft = "0";
 
 }
 
+const closeAndNavigate = () =>{
+   setIsNavOpen(false);
+   navigate('/home');
+   if(width <= 930 ) document.getElementById('id').style.width = "0";
+   if(width > 768) return;
+   document.getElementById('id').style.width = "0";
+ 
+ }
 
 const openTwitterLinkHandler = () =>{
    window.open('https://twitter.com/OfficialLottero','noopener, noreferrer');
@@ -104,63 +89,69 @@ const openChannelLinkHandler = () =>{
 
 
 const downloadWhitePaper = () =>{
-   setShowPopup(true);
-   const timer = setTimeout(()=>{
-      setShowPopup(false);
-   }, 2000);
+   saveAs('https://lottero.finance/Lottero_wp.pdf');
+}
 
-   return ()=> clearTimeout(timer);
-  // saveAs('http://localhost:4000/whitepaper', 'LTOPaper.pdf');
+const navigateToGames = () =>{
+   setIsNavOpen(false);
+   navigate(`/players/${`0x3A83E8B8C9E447C2E90e6e036EAC8624D883f5FC`}`)
+   // navigate('/players/'+ '0x3A83E8B8C9E447C2E90e6e036EAC8624D883f5FC');
+   if(width <= 930 ) document.getElementById('id').style.width = "0";
+  if(width > 768) return;
+  document.getElementById('id').style.width = "0";
 }
 
     return (
         <main className={classes.parent}>
-          { isLoading && <LoadingUI />}
-          {showPopup && <Popup width={width} text={`Whitepaper will be available soon.`} />}
          {(width >=300 || isNavOpen) && <section className={classes.sideNav}  id='id'>
            {(width <= 768 || (width >=810 && width <= 930)) && <div className={classes.cancelContainer}>
            <img src={cancelLogoWhite} alt='' className={classes.cancelIcon} onClick={closeNav}/>
            </div>}
         <div className={classes.logoContainer}>
            <h1>Lottero</h1>
-        {/* <img src={lotteroLogo} alt='' className={classes.logo}/> */}
         </div>
         <nav className={classes.nav}>
-              <Link to="home-section" smooth={true} spy={true} className={classes.navList} onClick={closeNav}>
+              <Link to="home-section" smooth={true} spy={true} className={classes.navList} onClick={closeAndNavigate}>
                  <div>
                     <img src={homeLogo} alt='' className={classes.homeImg}/>   
                  </div>
                  <p>Home</p>
                </Link>
-               <Link to="game-stat" smooth={true} spy={true} className={classes.navList} onClick={closeNav}>
+               <Link to="game-stat" smooth={true} spy={true} className={classes.navList} onClick={closeAndNavigate}>
                  <div>
                     <img src={GameIcon} alt='' className={classes.homeImg}/>   
                  </div>
                  <p>Game Stats</p>
             </Link>
-               <Link to="lottero-stat" smooth={true} spy={true} className={classes.navList} onClick={closeNav}>
+               <Link to="lottero-stat" smooth={true} spy={true} className={classes.navList} onClick={closeAndNavigate}>
                  <div>
                     <img src={LotteroStatIcon} alt='' className={classes.homeImg}/>   
                  </div>
                  <p>Lottero Stats</p>
             </Link>
-            <Link to="market-stat" smooth={true} spy={true} className={classes.navList} onClick={closeNav}>
+            <Link to="market-stat" smooth={true} spy={true} className={classes.navList} onClick={closeAndNavigate}>
                  <div>
                     <img src={MarketStatIcon} alt='' className={classes.homeImg}/>   
                  </div>
                  <p>Market Stats</p>
             </Link>
-            <Link to="tokenomics" smooth={true} spy={true} className={classes.navList} onClick={closeNav}>
+            <Link to="tokenomics" smooth={true} spy={true} className={classes.navList} onClick={closeAndNavigate}>
                  <div>
                     <img src={TokenomicsIcon} alt='' className={classes.homeImg}/>   
                  </div>
                  <p>Tokenomics</p>
             </Link>
-            <Link to="roadmap" smooth={true} spy={true} className={classes.navList} onClick={closeNav}>
+            <Link to="roadmap" smooth={true} spy={true} className={classes.navList} onClick={closeAndNavigate}>
                  <div>
                     <img src={RoadmapIcon} alt='' className={classes.homeImg}/>   
                  </div>
                  <p>Roadmap</p>
+            </Link>
+            <Link to="" smooth={true} spy={true} className={classes.navList} onClick={navigateToGames}>
+                 <div>
+                    <img src={PlayersIcon} alt='' className={classes.homeImg}/>   
+                 </div>
+                 <p>Players</p>
             </Link>
            {width <= 768 && <nav className={classes.bottomSocials}>
                  <p>Join Community</p>
@@ -179,7 +170,7 @@ const downloadWhitePaper = () =>{
         </nav>
     </section>}
 
-    {/* This is the second section */}
+    {/* This is the second section i.e the top section */}
     <section className={classes.main} id='main'>
         <header className={classes.header}>
        {(width <= 768 || (width >=810 && width <= 930)) &&<nav className={classes.hamburgerContainer}>
@@ -203,16 +194,11 @@ const downloadWhitePaper = () =>{
             <button className={classes.whitePaperBtn} onClick={downloadWhitePaper}>White Paper</button>
           </nav>
         </header>
-        <HomeSection />
-        <GameStatSection width={width} />
-        <LotteroStatSection />
-        <MarketStatSection />
-        <TokenomicsSection />
-        <RoadmapSection />
-        <BottomSection />
+        {props.children}
+        <BottomSection /> 
      </section>
          </main>
     );
 }
 
-export default Header;
+export default MainUI;

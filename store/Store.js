@@ -1,9 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import uiReducer from './Slice';
-import TimerReducer from "./TimerSlice";
-
+import LotteroReducer from './LotteroSlice';
+import PlayerSlice from "./PlayerSlice";
 
 const store = configureStore(
-    { reducer: { ui: uiReducer, timer: TimerReducer }});
+    { reducer: { lottero: LotteroReducer, players: PlayerSlice }});
 
 export default store;

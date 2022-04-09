@@ -4,10 +4,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const MarketStatSection = () => {
-   const selector = useSelector(state => state.ui);
+   const selector = useSelector(state => state.lottero);
    let mcap = selector.mcap.toFixed(0);
    const tokenPrice = '$'+selector.tokenDollarPrice.toFixed(8);
-   const bnbPrice = '$'+selector.bnbPrice.toFixed(8);
+   const bnbPrice = selector.bnbPrice.toFixed(12);
    let liquidityTokens = selector.tokenLiquidity.toFixed(3);
    const bnbLiquidity = selector.bnbLiquidity.toFixed(2)+' BNB';
 
@@ -54,4 +54,4 @@ const MarketStatSection = () => {
    );
 }
 
-export default React.memo(MarketStatSection);
+export default MarketStatSection;

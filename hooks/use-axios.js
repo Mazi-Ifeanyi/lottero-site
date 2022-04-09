@@ -8,21 +8,22 @@ const useAxios = () =>{
    const [isLoading, setIsLoading] = useState(false);
    const [error, setError] = useState(null);
 
-   const sendGetRequest = useCallback(async(url, callback) =>{
+   const sendGetRequest = useCallback(async(url, params, callback) =>{
     try{
       setIsLoading(true);
       setError(null);
-      const response = await axios.get(url, {headers:{'Content-Type' : 'application/json'}, timeout: 60000 });
+      const response = await axios.get(url, {headers:{'Content-Type' : 'application/json'}, timeout: 60000, params: params });
       const status = response.status;
       const data = response.data;
        if(status === 200 || status === 304){
-          callback(data);
-         }
-         if(status === 400){
+          callback(data, true);
+         }else{
             setError('An error occured');
-            callback(data);
+            callback({}, false);
           }
          }catch(err){
+          callback({}, false);
+           //console.log(err)
            if(err.code === 'ECONNABORTED') setError('timeout');
            else setError('An error occured');
          }

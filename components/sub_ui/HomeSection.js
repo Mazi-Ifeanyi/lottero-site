@@ -2,7 +2,11 @@ import classes from './HomeSection.module.css';
 import image from '../../assets/balls.png';
 import React, { useState, useEffect } from 'react';
 import useAxios from '../../hooks/use-axios';
-
+import { useDispatch } from 'react-redux';
+import { saveLotteroData } from '../../store/LotteroSlice';
+import { isNull, parseServerResponse } from '../../util/Util';
+import LoadingUI from '../UI/LoadingUI';
+import axios from 'axios';
 
 let days;
 let hour;
@@ -12,15 +16,71 @@ let sec;
 
 const HomeSection = () =>{
    const [timer, setTimer] = useState();
-   const { sendGetRequest } = useAxios()
+   const { sendGetRequest, isLoading } = useAxios()
+   const dispatch = useDispatch();
+   //const [ hideTimer, setHideTimer ] = useState(false);
 
+     
+   useEffect(()=>{
+      //  const url = 'http://192.168.43.188:4000/market';
+      const url = 'https://lottero.finance/market';
+      const params = {
+         ca: '0x3A83E8B8C9E447C2E90e6e036EAC8624D883f5FC'
+      }
+     
+       sendGetRequest(url, params, function(resData){
+          if(!isNull(resData)){
+              const obj = parseServerResponse(resData);
+              dispatch(saveLotteroData(obj));
+            //   console.log('i got data from server and this is mAINUI useEFFECT', resData);
+          }
+       });
+   },[sendGetRequest, dispatch]);
+
+
+   
+useEffect(()=>{
+     const interval = setInterval(async()=>{
+     // console.log(' i am in the interval');
+   
+         try{
+         //   const url = 'http://192.168.43.188:4000/market';
+            const url = 'https://lottero.finance/market';
+             const params = {
+                 ca: '0x3A83E8B8C9E447C2E90e6e036EAC8624D883f5FC'
+             }
+           const response = await axios.get(url, {headers:{'Content-Type' : 'application/json'}, timeout: 60000, params: params });
+           const status = response.status;
+           const data = response.data;
+       if(status === 200 || status === 304){
+              if(!isNull(data)){
+               const obj = parseServerResponse(data);
+               dispatch(saveLotteroData(obj));
+              }
+         }
+         }catch(err){}
+      }, 15000);
+     
+     return ()=> clearInterval(interval);
+   },[dispatch]);
+
+   
    useEffect(()=>{
       const url = 'https://lottero.finance/countdown';
-      sendGetRequest(url, function(resData){
-         days = resData.days;
-         hour = resData.hour;
-         mins = resData.mins;
-         sec = resData.sec;
+      // const url = 'http://192.168.43.188:4000/countdown';
+      const params = {};
+      sendGetRequest(url, params, function(resData, resolved){
+         //console.log(resolved);
+          if(!resolved){
+            // console.log('i entered here')
+            // setHideTimer(true);
+         }else{
+            days = resData.days;
+            hour = resData.hour;
+            mins = resData.mins;
+            sec = resData.sec;
+            // if(+days <= 0) setHideTimer(true);
+         }
       });
 
    },[sendGetRequest]);
@@ -56,40 +116,42 @@ const HomeSection = () =>{
       return ()=> clearInterval(interval);
    },[timer]);
 
+   
 
 
    return(
       <main className={classes.parent} id='home-section'>
+                   { isLoading && <LoadingUI />}
           <section className={classes.leftSection}>
              <h1>Empower yourself with Lottero <b className={classes.moneyText}>MoneyMaker.</b></h1>
  <p>We aim to provide a fair and consistent opportunity for all lovers of crypto and lottery to stand a chance of making real gains.</p>
-     <span className={classes.timerParent}>
-        <h2>Lottero will be launched in {days} days</h2>
-        <div className={classes.timerContainer}>
-          <div>
-             <p>{hour}</p>
-          </div>
-          <p>:</p>
-          <div>
-             <p>{mins}</p>
-          </div>
-          <p>:</p>
-          <div>
-             <p>{sec}</p>
-          </div>
-          </div>
-          <div className={classes.timeText}>
-             <div>
-                <p>Hour</p>
-             </div>
-             <div>
-                <p>Minute</p>
-             </div>
-             <div>
-                <p>Seconds</p>
-             </div>
-          </div>
-     </span>
+   {/*!hideTimer &&<span className={classes.timerParent}>
+      <h2>Lottero will be launched in {days} days</h2>
+      <div className={classes.timerContainer}>
+         <div>
+            <p>{hour}</p>
+         </div>
+         <p>:</p>
+         <div>
+            <p>{mins}</p>
+         </div>
+         <p>:</p>
+         <div>
+            <p>{sec}</p>
+         </div>
+         </div>
+         <div className={classes.timeText}>
+            <div>
+               <p>Hour</p>
+            </div>
+            <div>
+               <p>Minute</p>
+            </div>
+            <div>
+               <p>Seconds</p>
+            </div>
+         </div>
+   </span>*/}
           </section>
           <section className={classes.rightSection}>
           <img src={image} alt='' />
@@ -99,4 +161,4 @@ const HomeSection = () =>{
    );
 }
 
-export default React.memo(HomeSection);
+export default HomeSection;

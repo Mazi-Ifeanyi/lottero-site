@@ -7,7 +7,7 @@
 
 .leftSection{
     width: 50%;
-    height: 300px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     padding-left: 70px;
@@ -58,12 +58,19 @@
 .rightSection > img{
     width: 300px;
     height: 300px;
+    animation: moveSide 6s linear infinite;
 }
+
+.rightSection > img:hover {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+  }
 
 .timerParent{
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
+    height: fit-content;
     /* background-color: red; */
 
 }
@@ -80,6 +87,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: fit-content;
 }
 
 .timerContainer > span{
@@ -138,6 +146,16 @@
     width: 5rem;
    margin-top: 0;
 }
+
+@keyframes moveSide {
+    0%, 100%{
+        transform: translateX(-20px);
+    }
+    50%{
+        transform: translateY(20px);
+    }
+}
+
 
 
 @media screen and (max-width: 768px) {

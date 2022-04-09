@@ -89,15 +89,15 @@ const RoadmapSection = () =>{
                     </span>
                     <span className={classes.itemsContainer}>
                         <p className={classes.numberPara}>2</p>
-                        <p className={classes.para}>Launch of Lottero Money</p>
+                        <p className={classes.para}>Launch of Lottero Finance Bot</p>
                     </span>
                     <span className={classes.itemsContainer}>
                         <p className={classes.numberPara}>3</p>
-                        <p className={classes.para}>Maker Bot</p>
+                        <p className={classes.para}>Major Burn</p>
                     </span>
                     <span className={classes.itemsContainer}>
                         <p className={classes.numberPara}>4</p>
-                        <p className={classes.para}>Major Burn</p>
+                        <p className={classes.para}>DApp</p>
                     </span>
                     <span className={classes.itemsContainer}>
                         <p className={classes.numberPara}>5</p>
@@ -114,15 +114,15 @@ const RoadmapSection = () =>{
                     </span>
                     <span className={classes.itemsContainer}>
                         <p className={classes.numberPara}>2</p>
-                        <p className={classes.para}>Joint Development Of Tgswap</p>
+                        <p className={classes.para}>Development of Lottero Swap</p>
                     </span>
                     <span className={classes.itemsContainer}>
                         <p className={classes.numberPara}>3</p>
-                        <p className={classes.para}>Launch Of Lotteroswap</p>
+                        <p className={classes.para}>Android App Launch(Playstore)</p>
                     </span>
                     <span className={classes.itemsContainer}>
                         <p className={classes.numberPara}>4</p>
-                        <p className={classes.para}>More Listing</p>
+                        <p className={classes.para}>Expansion of Roadmap</p>
                     </span>
                  </article>
              </div>
